@@ -1,0 +1,80 @@
+create or replace schema curated_zone;
+
+USE SCHEMA curated_zone;
+
+--create transient tables for curated zone
+
+--Customer table
+
+create or replace transient table curated_customers(
+customer_id	number (38,0) Primary key,
+cust_name varchar(200),
+city varchar(200),
+grade number(38,0),	
+salesman_id number(38,0)
+);
+
+---MOVING ALL THE DATA FROM LANDING TO CURATED
+
+INSERT INTO DBO.curated_zone.curated_customers(
+    customer_id,
+    cust_name,
+    city,
+    grade,
+    salesman_id)
+select
+   (customer_id,
+    cust_name,
+    city,
+    grade,
+    salesman_id)
+from DBO.landing_zone.landing_customers;
+
+
+--orders table
+
+create or replace transient table curated_orders(      
+ord_no	number (38,0) primary key,
+purch_amt number (38,0),
+customer_id number (38,0),
+salesman_id number(38,0)
+);
+
+
+INSERT INTO DBO.curated_zone.curated_orders(
+ord_no,
+purch_amt ,
+customer_id ,
+salesman_id)
+select 
+(ord_no,
+purch_amt ,
+customer_id ,
+salesman_id)
+from DBO.landing_zone.landing_orders;
+
+
+--salesman table
+
+create or replace transient table curated_salesman
+name varchar(200) primary key,
+city varchar(200),
+comission number(3,2),	
+salesman_id number(38,0)
+);
+
+INSERT INTO DBO.curated_zone.curated_salesman(
+name,
+city,
+comission,
+salesman)
+select 
+(name,
+city,
+comission,
+salesman)
+from DBO.landing_zone.landing_salesman;
+
+
+--see created tables
+Show tables;

@@ -1,0 +1,2 @@
+Snowflake - https://www.udemy.com/course/snowflake-cloud-data-warehouse/learn/lecture/16565080#overview
+Python - https://www.udemy.com/course/mastering-python-data-handling-analysis-and-visualization/learn/lecture/34649156?start=0#overview

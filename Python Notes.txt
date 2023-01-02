@@ -1,0 +1,316 @@
+     String
+
+\n: new line
+\t: Tab means(8 spaces)
+\\: Back slash
+\': Single quote (')
+\": Double quote (")
+
+
+print('{} + {} = {}'.format(a, b, a + b))
+
+
+language = 'Python'
+a,b,c,d,e,f = language # unpacking sequence characters into variables
+print(a) # P
+
+
+language = 'Python'
+first_letter = language[0]
+
+
+Slicing Python Strings
+language = 'Python'
+first_three = language[0:3] # starts at zero index and up to 3 but not include 3
+last_three = language[3:6]
+last_three = language[-3:]
+
+
+Reversing a String
+print(greeting[::-1]) # !dlroW ,olleH
+
+
+Skipping Characters While Slicing
+language = 'Python'
+pto = language[0:6:2] #
+print(pto) # Pto
+
+
+capitalize(): Converts the first character of the string to capital letter
+print(challenge.capitalize()) # 'Thirty days of python'
+
+count(): returns occurrences of substring in string, count(substring, start=.., end=..). The start is a starting indexing for counting and end is the last index to count.
+challenge = 'thirty days of python'
+print(challenge.count('y')) # 3
+
+endswith(): Checks if a string ends with a specified ending
+print(challenge.endswith('on'))   # True
+
+expandtabs(): Replaces tab character with spaces, default tab size is 8. It takes tab size argument
+print(challenge.expandtabs(10)) # 'thirty    days      of        python'
+
+islower(): Checks if all alphabet characters in the string are lowercase
+isupper(): Checks if all alphabet characters in the string are uppercase
+print(challenge.isupper()) #  False
+
+replace(): Replaces substring with a given string
+print(challenge.replace('python', 'coding')) # 'thirty days of coding'
+
+split(): Splits the string, using given string or space as a separator
+challenge = 'thirty, days, of, python'
+print(challenge.split(', ')) # ['thirty', 'days', 'of', 'python']
+
+title(): Returns a title cased string
+print(challenge.title()) # Thirty Days Of Python
+
+swapcase(): Converts all uppercase characters to lowercase and all lowercase characters to uppercase characters
+print(challenge.swapcase())  # tHIRTY dAYS oF pYTHON
+
+startswith(): Checks if String Starts with the Specified String
+print(challenge.startswith('thirty')) # False
+
+
+       List
+
+List: is a collection which is ordered and changeable(modifiable). Allows duplicate members.
+Tuple: is a collection which is ordered and unchangeable or unmodifiable(immutable). Allows duplicate members.
+Set: is a collection which is unordered, un-indexed and unmodifiable, but we can add new items to the set. Duplicate members are not allowed.
+Dictionary: is a collection which is unordered, changeable(modifiable) and indexed. No duplicate members.
+
+fruits = ['banana', 'orange', 'mango', 'lemon']
+first_fruit = fruits[0] # we are accessing the first item using its index
+last_fruit = fruits[-1]
+
+Unpacking List Items
+lst = ['item','item2','item3', 'item4', 'item5']
+first_item, second_item, third_item, *rest = lst
+print(first_item)     # item1
+# Third Example about unpacking list
+countries = ['Germany', 'France','Belgium','Sweden','Denmark','Finland','Norway','Iceland','Estonia']
+gr, fr, bg, sw, *scandic, es = countries
+print(gr)
+
+all_fruits = fruits[0:] # if we don't set where to stop it takes all the rest
+orange_and_mango = fruits[1:3] # it does not include the first index
+orange_and_lemon = fruits[::2] # here we used a 3rd argument, step. It will take every 2cnd item - ['banana', 'mango']
+
+Modifying Lists
+fruits = ['banana', 'orange', 'mango', 'lemon']
+fruits[0] = 'avocado'  #replace avocado with banana
+
+does_exist = 'banana' in fruits  #for check if banana present in fruits
+
+fruits.append('apple')
+print(fruits)           # ['banana', 'orange', 'mango', 'lemon', 'apple']
+
+fruits.insert(2, 'apple') # insert apple between orange and mango
+print(fruits)           # ['banana', 'orange', 'apple', 'mango', 'lemon']
+
+fruits.remove('banana')
+
+The pop() method removes the specified index, (or the last item if index is not specified):
+fruits.pop(0)
+
+The del keyword removes the specified index and it can also be used to delete items within index range. It can also delete the list completely
+del fruits[1:3]     # this deletes items between given indexes, so it does not delete the item with index 3!
+del fruits  #to delete all list
+
+fruits_copy = fruits.copy()
+
+num1.extend(num2)
+
+The count() method returns the number of times an item appears in a list:
+print(fruits.count('orange'))   # 1
+
+The reverse() method reverses the order of a list.
+fruits.reverse()
+
+
+
+       Tuple
+
+all_items = tpl[0:]         # all items
+middle_two_items = tpl[1:3]  # does not include item at index 3
+
+Checking an Item in a Tuple
+tpl = ('item1', 'item2', 'item3','item4')
+'item2' in tpl # True
+
+Joining Tuples
+tpl3 = tpl1 + tpl2
+
+Deleting Tuples
+It is not possible to remove a single item in a tuple but it is possible to delete the tuple itself using del.
+del tpl1
+
+
+          Sets
+
+Checking an Item in a Set
+tpl = ('item1', 'item2', 'item3','item4')
+'item2' in tpl # True
+
+Adding Items to a Set
+st.add('item5')
+
+Add multiple items using update() The update() allows to add multiple items to a set. The update() takes a list argument.
+st.update(['item5','item6','item7'])
+
+Removing Items from a Set
+st.remove('item2')
+
+The pop() methods remove a random item from a list and it returns the removed item.
+fruits.pop()  # removes a random item from the set
+
+Clearing Items in a Set
+st.clear()
+
+If we want to delete the set itself we use del operator.
+del st
+
+Union This method returns a new set
+st3 = st1.union(st2)
+
+Update This method inserts a set into a given set
+st1.update(st2) # st2 contents are added to st1
+
+
+       Dictionaries
+
+A dictionary is a collection of unordered, modifiable(mutable) paired (key: value) data type.
+dct = {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+
+We can access Dictionary items by referring to its key name.
+print(dct['key1']) # value1
+
+person = {
+    'first_name':'Asabeneh',
+    'last_name':'Yetayeh',
+    'age':250,
+    'country':'Finland',
+    'is_marred':True,
+    'skills':['JavaScript', 'React', 'Node', 'MongoDB', 'Python'],
+    'address':{
+        'street':'Space street',
+        'zipcode':'02210'
+    }
+    }
+print(person['first_name']) # Asabeneh
+print(person['country'])    # Finland
+print(person['skills'])     # ['JavaScript', 'React', 'Node', 'MongoDB', 'Python']
+print(person['skills'][0])  # JavaScript
+print(person['address']['street']) # Space street
+
+We can add new key and value pairs to a dictionary
+person['job_title'] = 'Instructor'
+person['skills'].append('HTML')
+
+We can modify items in a dictionary
+person['age'] = 252
+
+We use the in operator to check if a key exist in a dictionary
+print('key2' in dct) # True
+
+We can copy a dictionary using a copy() method. Using copy we can avoid mutation of the original dictionary.
+dct_copy = dct.copy() # {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+
+
+        Loops
+
+While Loop
+We use the reserved word while to make a while loop. It is used to execute a block of statements
+repeatedly until a given condition is satisfied. When the condition becomes false, the lines of code
+after the loop will be continued to be executed.
+
+count = 0
+while count < 5:
+    print(count)
+    count = count + 1
+#prints from 0 to 4
+
+Break: We use break when we like to get out of or stop the loop.
+count = 0
+while count < 5:
+    print(count)
+    count = count + 1
+    if count == 3:
+        break
+
+Continue: With the continue statement we can skip the current iteration, and continue with the next:
+count = 0
+while count < 5:
+    if count == 3:
+        continue
+    print(count)
+    count = count + 1
+
+
+         For Loop
+A for keyword is used to make a for loop, similar with other programming languages, but with some syntax 
+differences. Loop is used for iterating over a sequence 
+(that is either a list, a tuple, a dictionary, a set, or a string).
+
+numbers = [0, 1, 2, 3, 4, 5]
+for number in numbers: # number is temporary name to refer to the list's items, valid only inside this loop
+    print(number)       # the numbers will be printed line by line, from 0 to 5
+
+language = 'Python'
+for letter in language:
+    print(letter)
+
+
+for i in range(len(language)):
+    print(language[i])
+
+
+       The Range Function
+The range() function is used list of numbers. The range(start, end, step) takes three parameters: starting, 
+ending and increment. By default it starts from 0 and the increment is 1. The range sequence needs at least 1
+ argument (end). Creating sequences using range
+lst = list(range(11)) 
+st = set(range(0,11,2))  #for iterator in range(start, end, step)
+
+
+
+       Functions
+
+Function without Parameters
+def add_two_numbers ():
+    num_one = 2
+    num_two = 3
+    total = num_one + num_two
+    print(total)
+add_two_numbers()
+
+
+Function with Parameters
+def sum_two_numbers (num_one, num_two):
+    sum = num_one + num_two
+    print(sum)
+sum_two_numbers(1, 9)
+
+def greetings (name = 'Peter'):
+    message = name + ', welcome to Python for Everyone!'
+    return message
+print(greetings())
+print(greetings('Asabeneh'))
+
+def sum_all_nums(*nums):
+    total = 0
+    for num in nums:
+        total += num     # same as total = total + num 
+    return total
+print(sum_all_nums(2, 3, 5)) # 10
+
+# It is also possible to make a list of tuples
+numbers = [(i, i * i) for i in range(11)]
+print(numbers)                             # [(0, 0), (1, 1), (2, 4), (3, 9), (4, 16), (5, 25)]
+
+even_numbers = [i for i in range(21) if i % 2 == 0]  # to generate even numbers list in range 0 to 21
+print(even_numbers)                    # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+# Filter numbers: let's filter out positive even numbers from the list below
+numbers = [-8, -7, -3, -1, 0, 1, 3, 4, 5, 7, 6, 8, 10]
+positive_even_numbers = [i for i in range(21) if i % 2 == 0 and i > 0]
+print(positive_even_numbers)                    # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+

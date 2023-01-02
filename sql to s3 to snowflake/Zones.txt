@@ -1,0 +1,280 @@
+Landing Zones
+
+create database DBO;
+create or replace schema landing_zone;
+create or replace schema consumption_zone;
+
+--Create Order Table (Landing Zone)
+create or replace transient table landing_item (
+        item_id varchar,
+        item_desc varchar,
+        start_date varchar,
+        end_date varchar,
+        price varchar,
+        item_class varchar,
+        item_CATEGORY varchar
+) comment ='this is item table with in landing schema';
+
+create or replace transient table landing_customer (
+    customer_id varchar,
+    salutation varchar,
+    first_name varchar,
+    last_name varchar,
+    birth_day varchar,
+    birth_month varchar,
+    birth_year varchar,
+    birth_country varchar,
+    email_address varchar
+) comment ='this is customer table with in landing schema';
+
+create or replace transient table landing_order (
+    order_date varchar,
+    order_time varchar,
+    item_id varchar,
+    item_desc varchar,
+    customer_id varchar,
+    salutation varchar,
+    first_name varchar,
+    last_name varchar,
+    store_id varchar,
+    store_name varchar,
+    order_quantity varchar,
+    sale_price varchar,
+    disount_amt varchar,
+    coupon_amt varchar,
+    net_paid varchar,
+    net_paid_tax varchar,
+    net_profit varchar
+) comment ='this is order table with in landing schema';
+ show tables;   
+create or replace file format my_csv_vi_webui
+type = 'csv' 
+compression = 'auto' 
+field_delimiter = ',' 
+record_delimiter = '\n' 
+skip_header = 1
+field_optionally_enclosed_by = '\042' 
+null_if = ('\\N');
+
+--now see the data of tables
+select * from DBO.landing_zone.landing_customer
+select count(*) from DBO.landing_zone.landing_customer
+
+
+curated zone*
+
+---STEP1
+--CREATE ORDER, ITEMS AND CUSTOMER TABLE IN CURRATED ZONE
+ --CHANGING SCHEMA(CONTEXT)
+ use DBO
+ create or replace schema curated_zone;
+ USE SCHEMA DBO.curated_zone
+ --create tansient table
+ --items
+ create or replace transient table curated_items (
+        item_pk number autoincrement,
+        item_id varchar(16),
+        item_desc varchar,
+        start_date DATE,
+        end_date DATE,
+        price NUMBER(7,2),
+        item_class varchar(50),
+        item_CATEGORY varchar(50)
+) comment ='this is item table with in curated schema';
+--for customers
+create or replace transient table curated_customer (
+    customeR_pk number autoincrement,
+    customer_id varchar(18),
+    salutation varchar(10),
+    first_name varchar(20),
+    last_name varchar(30),
+    birth_day number,
+    birth_month number,
+    birth_year number,
+    birth_country varchar(20),
+    email_address varchar(50)
+) comment ='this is customer table with in curated schema';
+--orders
+create or replace transient table curate_orders (
+    order_pk number autoincrement,
+    order_date DATE,
+    order_time varchar,
+    item_id varchar(16),
+    item_desc varchar,
+    customer_id varchar(18),
+    salutation varchar(10),
+    first_name varchar(20),
+    last_name varchar(30),
+    store_id varchar(16),
+    store_name varchar(50),
+    order_quantity NUMBER,
+    sale_price NUMBER(8,5),
+    disount_amt NUMBER(8,5),
+    coupon_amt NUMBER(8,5),
+    net_paid NUMBER(8,5),
+    net_paid_tax NUMBER(8,5),
+    net_profit NUMBER(8,5)
+) comment ='this is order table with in curated schema';
+
+---MOVING ALL THE DATA FROM LANDING TO CURATED
+INSERT INTO DBO.curated_zone.curated_customer(
+customer_id,
+    salutation,
+    first_name,
+    last_name,
+    birth_day,
+    birth_month,
+    birth_year,
+    birth_country,
+    email_address )
+select
+customer_id,
+    salutation,
+    first_name,
+    last_name,
+    birth_day,
+    birth_month,
+    birth_year,
+    birth_country,
+    email_address from DBO.landing_zone.landing_customer;
+SHOW TABLES
+select * from curated_orders
+
+
+* consumtion *
+use dbo
+create or replace schema DBO.consumption_zone;
+use schema dbo.consumption_zone
+--we need to create item and customer dimension table
+--which followed by order fact table
+--FIRST ITEM DIMENTIONAL TABLE.
+create or replace table item_dim(
+        item_dim_key number autoincrement,
+        item_id varchar(16),
+        item_desc varchar,
+        start_date DATE,
+        end_date DATE,
+        price NUMBER(7,2),
+        item_class varchar(50),
+        item_CATEGORY varchar(50),
+        added_timestamp timestamp default current_timestamp(),
+        update_timestamp timestamp default current_timestamp(),
+        active_flag varchar(1) default 'Y'
+)
+---2ND CUSTOMER DIMENTIONAL TABLE
+create or replace table customer_dim(
+    customeR_pk number autoincrement,
+    customer_id varchar(18),
+    salutation varchar(10),
+    first_name varchar(20),
+    last_name varchar(30),
+    birth_day number,
+    birth_month number,
+    birth_year number,
+    birth_country varchar(20),
+    email_address varchar(50),
+    added_timestamp timestamp default current_timestamp(),
+    update_timestamp timestamp default current_timestamp(),
+    active_flag varchar(1) default 'Y'
+  )
+--3rd create order as a fact table having dim key as part of it
+--some of the field are ommitted from order table for simplicity
+--and demonstrate the flow
+create or replace table order_fact(
+    order_fact_key number autoincrement,
+    customer_dim_key number,
+    item_dim_key number,
+    order_date date,
+    order_count number,
+    sale_price number(20,2),
+    disount_amt NUMBER(20,2),
+    coupon_amt NUMBER(20,2),
+    net_paid NUMBER(20,2),
+    net_paid_tax NUMBER(20,2),
+    net_profit NUMBER(20,2)
+) comment = 'order table in consumption schema'
+
+show tables
+
+---lets load 1st time data
+--load item data from curated item to consumption item dim table
+insert into dbo.consumption_zone.item_dim(
+  item_id,
+  item_desc,
+  start_date,
+  end_date,
+  price,
+  item_class,
+  item_category
+)
+select
+   item_id,
+   item_desc,
+   start_date,
+   end_date,
+   price,
+   item_class,
+   item_category
+from DBO.curated_zone.curated_items
+
+----load data from  curated_customer's likely to previous one
+insert into dbo.consumption_zone.customer_dim(
+  customer_id,
+    salutation,
+    first_name,
+    last_name,
+    birth_day,
+    birth_month,
+    birth_year,
+    birth_country,
+    email_address )
+
+select
+customer_id,
+    salutation,
+    first_name,
+    last_name,
+    birth_day,
+    birth_month,
+    birth_year,
+    birth_country,
+    email_address from DBO.curated_zone.curated_customer;
+   
+
+--load order from curated order to consumption order fact table
+--here we have to join the data and data is aggregated at day level
+insert into dbo.consumption_zone.order_fact(
+customer_dim_key,
+item_dim_key,
+order_date,
+order_count,
+order_quantity,
+sale_price,
+disount_amt,
+coupon_amt,
+net_paid,
+net_paid_tax,
+net_profit
+)
+ select
+ co.order_date,
+ cd.customer_dim_key,
+ id.item_dim_key,
+ count(1) as order_count,
+ sum(co.order_quantity),
+ sum(co.sale_price),
+ sum(co.disount_amt),
+ sum(co.coupon_amt),
+ sum(co.net_paid),
+ sum(co.net_paid_tax),
+ sum(co.net_profit)
+ from DBO.curated_zone.curated_orders as co
+ join DBO.consumption_zone.customer_dim cd on cd.customer_id=co.customer_id
+ join DBO.consumption_zone.item_dim id on id.item_id=co.item_id and id.item_desc=co.item_desc and id.end_date is null
+ group by
+        co.order_date,
+        cd.customer_dim_key,
+        id.item_dim_key
+        order by co.order_date;
+ --let see the table status
+ select * from order_fact

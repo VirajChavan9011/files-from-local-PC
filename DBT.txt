@@ -1,0 +1,15 @@
+Account
+yl84866.ap-southeast-1
+
+Database
+V
+Warehouse
+Viraj
+
+Username
+virajchavan4321
+Password
+•••••••••••••••
+Schema
+dbt_virajchavan9011
+Linked to GitHub account VirajChavan9011

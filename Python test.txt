@@ -1,0 +1,296 @@
+Day 1
+
+x=1+3j
+print(type(x))
+
+Day 2
+
+Using ternary operator
+x, y = 5, 6 
+     print("x" if x > y else "y")
+
+•	print("Welcome to" , end = ' ') 
+•	print(“python class" ) 
+•	Output :- Welcome to python class
+
+	print('09','12','2016', sep='-')
+Output:- 09-12-2016
+
+x = lambda a, b : a * b
+print(x(5, 6))
+30
+
+Day 3 
+x="I Like Python"
+print (x[2:6])
+print(x[-11:-7])
+
+x=int(input("enter 1 number"))
+
+Day 4
+print(x.upper())
+print(x.lower())
+print(len(x))
+
+x="welcome-in-python-class"
+y=x.split('-')
+
+year=2000
+month=4
+z="My birth year is {} and My birth month is {} and My name is Amit "
+z="My birth year is {0} and My birth month is {1} and My name is Amit "
+print(z.format(year,month))
+
+Day 5
+\'fhjjdj\'
+\n
+\t
+\\
+
+a=60
+b=13
+c=(a or b)
+print(c)
+
+Day 6
+num=int(input("enter Number: "))
+if num>0:
+    print("number is positive")
+elif num<0:
+    print("Number is negative")
+elif num==0:
+    print(num)
+
+Day 7
+# while loop - It works until the statement is true, it will run until 
+the statement is true. When fails it will stop working.
+
+a = 1 
+while a <= 7:
+    print(a)
+    a = a + 1 
+
+a = 10 
+while a >= 1:
+    print(a)
+    a = a - 1
+
+x = int(input("Insert Your Value: "))
+y = 1
+while y <= 10:
+    print(x*y)
+    y = y + 1
+
+x = 1
+sum = 0
+while x <= 10:
+    sum = sum + x 
+    print(sum)
+    x = x + 1
+
+Day 8
+a=int(input("enter number: "))
+for i in range(1,a+1):
+    if i%2==0:
+        print("Suare:",i*i)
+    else:
+        print("cube:",i*i*i)
+
+a=int(input("enter number: "))
+for i in range(1,a+1):
+    if i>0:
+        print("Positive",i)
+for i in range(-1,-a+1):
+    if -i<0:
+        print("Negative",i)
+
+Lists
+z=[5,6,2,3,"black","red","green"]
+z.insert(2,"white")
+print(z)
+
+z.remove("black")
+
+L2=[4.3,2.3,7.8,"orange"]
+z.extend(L2)
+
+for  i in z:
+    if i=="white":
+        z.insert(3,"yellow")
+    print(i)
+
+for i in z:
+    if i=="green":
+        z.pop()
+    print(i)
+
+a=["apple","red","banana"]
+b=["red","green"]
+c=zip(a,b) #will match two list
+print(list(c))
+
+list1=[1,2,3,4]
+list2=[]
+for i in list1:
+    list2.append(i*i)
+print(list2)
+
+list1=["hello","tech"]
+list2=["priya","rahul"]
+for x,y in zip(list1,list2):
+    print(x,y)
+
+l1=[40,30,10,15,40]
+l2=l1.count(40)
+print(l2)
+
+r1=[10,15,20,30,35]
+roll_no=int(input("Enter roll no:"))
+if roll_no in r1:
+     print("present")
+else:
+    print("Absent")
+
+k1=[12,75,150,180,145,525,50]
+for i in k1:
+    if i>500:
+        break
+    elif i>150:
+        continue
+    elif i%5==0:
+        print(i)
+
+Tuple
+y[1]="kiwi"
+
+slicing
+print(z[1:])
+
+t1=("red","yellow","green")  #packing
+(a,b,c)=t1    #unpacking
+print(a)
+
+p1=(4,5,"red",3.5)
+s=list(p1)
+s.append("orange")
+p1=tuple(s)
+
+a,s,d,f,g=p1
+print(a)
+
+p2=(5,"10",2.5,6)
+p3=p1+p2
+
+e1=(11,22)  #swaping
+e2=(99,88)
+e3=e1,e2=e2,e1
+print(e3)
+
+r=(10,20,30,40,50)
+r1=list(r)
+r2=r1[::-1]  #reverse
+print(r2)
+
+o=("white",[11,22,33],[5,15,25])
+o[1][1]=222
+print(o)
+
+#find occurance of 50
+b=(50,10,60,70,50)
+b1=b.count(50)
+print(b1)
+
+
+#sets 
+a={"apple",2,3,"banana",3,5}
+print("banana" in a)
+a.add("orange")
+a.update(b)
+a.remove("orange")
+a.discard("apple")
+
+#Dictionary
+m={"color1":"red","color2":"black","color3":"yellow"}
+for i in m.values():
+     print(i)
+y=m.get("color1")
+print(y)
+
+z=m.copy()
+print(z)
+
+z.update({"color4":"blue"})
+
+print( sum(m.values())
+
+#function
+def demo():
+    print("hello") 
+demo()
+
+def add_num(no1,no2):
+    sum=no1+no2
+    print(sum)
+add_num(2,4)
+
+def add_num1():
+    no1=int(input("enter 1 no"))
+    no2=int(input("enter 1 no"))
+    sum=no1+no2
+    print(sum)  
+add_num1()
+
+def word1(word):
+    w=word.upper()
+    print(w)
+word1("omkar")
+
+
+def word1(key):
+    d1={"a":100,"b":200,"c":300}
+    if key in d1:
+        print("this is present",key)
+    else:
+        print("this is not present",key)    
+word1("a")
+
+def sum1():
+    o=[1,2,3,4,5,6]
+    sum=0
+    for i in o:
+        sum=sum+i
+    print(sum)     
+sum1()
+
+def add1(*args):
+    for i in args:
+        sqre=i*i
+        print(sqre)
+add1(1,2,3,4,5,6)
+
+def asd(*args):
+    print(max(*args))
+    print(min(*args))      
+asd({2,3,4,7})
+
+#lambda
+x=lambda a,b,c:a*b*c
+print(x(2,3,4))
+
+l1=[1,2,3,4]
+l2=list(map(lambda a:a*a,l1))
+print(l2)
+
+l3=[12,13,1,3]
+l4=list(filter(lambda a:a%3==0,l3))
+print(l4)
+
+w1=int(input("enter first number :"))
+w2=int(input("Enter second number:"))
+w=lambda w1,w2:w1/w2
+print(w(4,2))
+
+
+a1=[5,6,2,3,1,4]
+a2=list(map(lambda a1:a1*a1*a1,a1))
+print(a2)

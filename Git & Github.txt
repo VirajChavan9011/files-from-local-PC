@@ -1,0 +1,52 @@
+Git status
+git init - to make git repo
+git add --a -for staging area
+git commit -m "commit staging files"
+git log -to see what commits made
+git add g.txt
+rm -rf .git -for not use git  (git is disabled)
+git clone https://github.com/tensorflow/tensorflow.git -for cloning repo
+pwd -to check working directory
+ls -to see all files
+cd tensorflow/ - to go in file directory
+q+enter -for out from git log
+touch error.log -to create error.log file
+touch .gitignore  - used to ignore files (if we add file name in this it will ignore that file)
+gfd/ -in .gitignore if we write this git will ignore that folder 
+/gfd/ -in .gitignore if we write this git will ignore only outer folder 
+git diff - compare working directory to staging area
+git add . - so everything goes in staging area
+git diff --staged - compare last commit to staging area
+git commit -a -m "direct commit"
+git rm f.txt -to delete file
+git mv (old file name) (new file name)
+git rm --cached db.ss -for untrack the file in git ignore
+git log -p -to see what changes made in directory
+git log -p -2 -to see only two changes
+git log --stat - to see changes simply
+git log --pretty=oneline - we can see all commits in one line
+git log --pretty=short -commits in short
+git log --pretty=full - commits in all info
+git log --since 2.days -changes in 2 days
+git log --since 2.weeks - changes in 2 weeks
+git log --pretty=format:"%h -- %an" - to show in this format
+git restore --staged README.md -to unstage file
+git checkout -- README.md -to unmodified
+git checkout -f  - to make all changes as last commit statement
+git remote add origin git@github.com:VirajChavan9011/Git.git  - to push data in github through git
+git remote -v  - to check through which link data can be pushed and pull
+git push -u origin main  - to upload data to github
+git config --global alias.st status  - to give other name to git commands
+git restore tp.txt  - modified commit will be matched with last commit
+---------branhing------------
+git checkout -b d  - to create and switched to new branch
+git checkout master   -for jumb in master branch
+git merge is   -for merge is in master
+git branch   - to see all branches
+git branch -v   - to see last commits from branches
+git branch --merged    - to see merged branches
+git branch --no-merged   -to see not merge branches
+git branch -d it    - to delete branch
+git push py is  -to push other branch
+git push py is:mg   -for take is branch as mg on github
+git push -d py is   - to delete branch in github
